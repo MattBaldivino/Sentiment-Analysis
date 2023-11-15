@@ -3,11 +3,23 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import LoginForm from './LoginForm';
+import axios from 'axios';
 
 //bootstrap grid system divided into 12 columns
 //number parameter given expresses the width of the column as 12 divided by the parameter
 //ex: sm={8} means that on small screen devices, the column will take up (12/8)% of the screen
 function LoginScreen(props){
+    const handleSubmit = async (email, password) => {
+        try {
+            const response = await axios.post('http://localhost:5000/login', {
+                email: email,
+                password: password
+            });
+            console.log(response.data); // Handle the response accordingly
+        } catch (error) {
+            console.error('There was an error!', error);
+        }
+    };
     return(
         <div>
             <Container className='title sticky-lg-top sticky-md-top header'>
@@ -23,6 +35,7 @@ function LoginScreen(props){
                         <LoginForm
                             buttonText = "Login"
                             registerText = "Don't have an account? Register here!"
+                            onSubmit={handleSubmit}
                          />
                     </Col>
                     <Col lg={6} className="img-container">
