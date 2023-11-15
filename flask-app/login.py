@@ -12,4 +12,3 @@ def serve(path):
     return send_from_directory(app.static_folder,'index.html')
 
 api.add_resource(requestHandler, '/flask/hello')
-#run with command: flask run

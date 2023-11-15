@@ -1,0 +1,49 @@
+h2, p{
+    font-family: Krub;
+}
+
+h4{
+    font-family: Chivo;
+}
+
+img{
+    max-width: 100%;
+    height: 60%;
+}
+
+.img-container{
+    text-align: center;
+}
+
+.login{
+    height: 100vh;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login h2{
+    margin-bottom: 3%;
+}
+
+.title{
+    margin: 0%;
+}
+
+.header{
+    background-image: linear-gradient(#437FC7, #6DAFFE);
+    max-width: 100%;
+    color: #FFFFFF;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.login-button{
+    background-color: #6DAFFE;
+    border-color: #6DAFFE;
+}
+
+.login-button p{
+    margin: 0;
+}
