@@ -1,14 +1,34 @@
-h2, p{
-    font-family: Krub;
+body{
+    background-color: #ECECEC;
 }
 
-h4{
-    font-family: Chivo;
+textarea{
+    width: 50%;
+    background-color: #ECECEC;
+    border-width: 0px;
+    outline: none !important;
+    font-size: 2em;
+    color: #474787;
+    font-family: 'Chivo Mono', monospace;
+    resize: none;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+    font-family: 'Chivo Mono';
+}
+
+h1{
+    font-weight: 700;
+    color: #474787;
 }
 
 img{
     max-width: 100%;
     height: 60%;
+}
+
+hr{ 
+    border-top: dotted 5px;
 }
 
 .img-container{
@@ -28,11 +48,13 @@ img{
 }
 
 .title{
-    margin: 0%;
+    margin: 0% 0% 3% 0%;
+    padding-left: 7%
+
 }
 
 .header{
-    background-image: linear-gradient(#437FC7, #6DAFFE);
+    background-color: #474787;
     max-width: 100%;
     color: #FFFFFF;
     padding-top: 1%;
@@ -40,10 +62,21 @@ img{
 }
 
 .login-button{
-    background-color: #6DAFFE;
-    border-color: #6DAFFE;
+    background-color: #474787;
+    border-color: #474787;
 }
 
 .login-button p{
     margin: 0;
+}
+
+.section{
+    font-family: 'Chivo Mono';
+    font-size: 4em;
+    color: #2C2C54;
+}
+
+.description{
+    color: #474787;
+    font-family: 'Chivo Mono', monospace;
 }

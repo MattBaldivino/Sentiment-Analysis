@@ -1,8 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import axios from "axios";
-import LoginScreen from "./LoginScreen";
-import RegisterScreen from './RegisterScreen';
+import LoginScreen from "./LoginScreen.jsx";
+import RegisterScreen from './RegisterScreen.jsx';
 import Sentiment from './Sentiment';
 import {
   BrowserRouter as Router,

@@ -12,24 +12,25 @@ function RegisterScreen(props){
         <div>
             <Container className='title sticky-lg-top sticky-md-top header'>
                 <Row>
-                    <Col lg={3}><h4>Sentiment Analysis App</h4></Col>
+                    <Col lg={3}><h5>Sentiment Analysis App</h5></Col>
                 </Row>
             </Container>
             <div className="login">
                 <Container>
-                <Row>
-                    <Col lg={6}> 
-                        <h2>Sign Up</h2>
-                        <LoginForm
-                            buttonText = "Register"
-                            registerText = ""
-                         />
-                    </Col>
-                    <Col lg={6} className="img-container">
-                        <img src="https://cdn-icons-png.flaticon.com/512/5377/5377629.png" alt="emotion"></img>
-                    </Col>
-                </Row>
-            </Container>
+                    <Row>
+                        <Col lg={6}> 
+                            <h2>Sign Up</h2>
+                            <LoginForm
+                                buttonText = "Register"
+                                registerText = ""
+                                urlText="/"
+                            />
+                        </Col>
+                        <Col lg={6} className="img-container">
+                            <img src="https://cdn-icons-png.flaticon.com/512/5377/5377629.png" alt="emotion"></img>
+                        </Col>
+                    </Row>
+                </Container>
             </div>
         </div>
         
