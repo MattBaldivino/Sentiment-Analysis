@@ -10,7 +10,6 @@ function LoginForm(props){
                     <Form.Label><h5>Email Address</h5></Form.Label>
                     <Form.Control type="email" placeholder="Enter email" />
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label><h5>Password</h5></Form.Label>
                     <Form.Control type="password" placeholder="Enter password" />
@@ -22,7 +21,7 @@ function LoginForm(props){
                 </Link>
                 <br></br>
                 <br></br>
-                <Link to="/RegisterScreen"><p>{props.registerText}</p></Link>
+                <Link to="/RegisterScreen" id="link-text"><p>{props.registerText}</p></Link>
             </Form>
     );
 }

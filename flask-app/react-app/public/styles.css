@@ -1,43 +1,59 @@
 body{
-    background-color: #ECECEC;
+    background-color: #FFFFFF;
+    overflow: hidden;
 }
 
 textarea{
-    width: 50%;
-    background-color: #ECECEC;
+    width: 82.5%;
+    background-color: #FFFFFF;
     border-width: 0px;
     outline: none !important;
     font-size: 2em;
-    color: #474787;
-    font-family: 'Chivo Mono', monospace;
+    color: #393939;
+    font-family: 'Source Serif 4', serif;
     resize: none;
 }
 
 h1, h2, h3, h4, h5, h6, p{
-    font-family: 'Chivo Mono';
+    font-family: 'Oswald', sans-serif;
 }
 
 h1{
-    font-weight: 700;
-    color: #474787;
+    font-weight: 600;
+    color: #393939;
 }
 
 img{
     max-width: 100%;
-    height: 60%;
+   height: 60%;
 }
 
 hr{ 
     border-top: dotted 5px;
 }
 
+a{
+    color: #393939;
+}
+
+button:hover{
+    background-color: #F37A1F;
+}
+
 .img-container{
     text-align: center;
+    color: #FFFFFF;
+}
+
+.login-body{
+    background-color: #F37A1F;
+    background-image: linear-gradient(to right, #FFFFFF 50%, rgba(0,0,0,0) 20%); 
+    position: relative;
 }
 
 .login{
     height: 100vh;
-    display:flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -47,23 +63,29 @@ hr{
     margin-bottom: 3%;
 }
 
-.title{
+.header{
+    max-width: 100%;
+    color: #393939;
+    padding: 1% 0% 1% 7%;
     margin: 0% 0% 3% 0%;
-    padding-left: 7%
-
 }
 
-.header{
-    background-color: #474787;
+.interface-header{
+    background-color: #FFFFFF;
+    color: #393939;
     max-width: 100%;
-    color: #FFFFFF;
-    padding-top: 1%;
-    padding-bottom: 1%;
+    padding: 1% 0% 1% 7%;
+    margin: 0% 0% 3% 0%;
 }
 
 .login-button{
-    background-color: #474787;
-    border-color: #474787;
+    background-color: #FF964F;
+    border-color: #FF964F;
+}
+
+.login-button:hover{
+    background-color: #F37A1F;
+    border-color: #F37A1F;
 }
 
 .login-button p{
@@ -71,12 +93,12 @@ hr{
 }
 
 .section{
-    font-family: 'Chivo Mono';
-    font-size: 4em;
-    color: #2C2C54;
+    font-family: 'Oswald', sans-serif;
+    font-size: 3em;
+    color: #51647a;
 }
 
 .description{
-    color: #474787;
-    font-family: 'Chivo Mono', monospace;
+    color: #393939;
+    font-family: 'Source Serif 4', serif;
 }

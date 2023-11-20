@@ -8,7 +8,7 @@ var TextareaAutosize = require('react-textarea-autosize').default;
 function Sentiment(){
     return(
         <div id="interface">
-            <Container className='title sticky-lg-top sticky-md-top header'>
+            <Container className='sticky-lg-top sticky-md-top interface-header'>
                 <Row>
                     <Col lg={3}><h5>Sentiment Analysis App</h5></Col>
                 </Row>
