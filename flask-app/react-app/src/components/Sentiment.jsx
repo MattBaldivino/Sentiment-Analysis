@@ -15,7 +15,7 @@ function Sentiment(){
             </Container>
             <Container>
                 <Row>
-                    <Col lg={6}>
+                    <Col lg={6} className="left-container">
                         <h1 className="section">Type Here:</h1>
                             <TextareaAutosize autoFocus />
                         <br></br>
@@ -23,7 +23,7 @@ function Sentiment(){
                             <p>Upload</p>
                         </Button>
                     </Col>
-                    <Col lg={6}>
+                    <Col lg={6} className="right-container">
                         <h1 className="section">What Is It?</h1>
                         <p className="description">Sentiment analysis is a type of natural language processing. It makes use of machine learning(ML),
                         artificial intelligence(AI), and other techniques in order to analyze the emotion associated with a body of text.

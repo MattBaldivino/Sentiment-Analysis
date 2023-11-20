@@ -19,7 +19,7 @@ function RegisterScreen(props){
             <div className="login">
                 <Container>
                     <Row>
-                        <Col lg={6}> 
+                        <Col lg={6} className="left-container"> 
                             <h2>Sign Up</h2>
                             <LoginForm
                                 buttonText = "Register"
@@ -27,7 +27,7 @@ function RegisterScreen(props){
                                 urlText="/"
                             />
                         </Col>
-                        <Col lg={6} className="img-container">
+                        <Col lg={6} className="right-container">
                             <img src="https://cdn-icons-png.flaticon.com/512/10148/10148754.png" alt="emotion"></img>
                             <Carousel indicators={false}>
                                 <Carousel.Item>

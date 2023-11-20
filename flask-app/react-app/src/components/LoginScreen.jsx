@@ -19,15 +19,15 @@ function LoginScreen(props){
             <div className="login">
                 <Container>
                     <Row>
-                        <Col lg={6}>
-                            <h2>Welcome</h2>
+                        <Col lg={6} className="left-container">
+                            <h1>Welcome</h1>
                             <LoginForm
                                 buttonText = "Login"
                                 registerText = "Don't have an account? Register here!"
                                 urlText = "/Sentiment"
                             />
                         </Col>
-                        <Col lg={6} className="img-container">
+                        <Col lg={6} className="right-container">
                             <img src="https://cdn-icons-png.flaticon.com/512/10148/10148754.png" alt="emotion"></img>
                             <Carousel indicators={false}>
                                 <Carousel.Item>
