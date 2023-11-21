@@ -2,7 +2,6 @@ body{
     background-color: #FFFFFF;
     overflow: hidden;
 }
-
 textarea{
     width: 82.5%;
     background-color: #FFFFFF;
@@ -31,6 +30,9 @@ img{
 
 hr{ 
     border-top: dotted 5px;
+    max-height: 10px;
+    border-color: #393939;
+    margin: 40px 0px 40px 0px;
 }
 
 a{
@@ -90,15 +92,14 @@ form{
     max-width: 100%;
     color: #393939;
     padding: 10px 0px 10px 80px;
-    margin: 0px 0px 10px 0px;
 }
 
 .interface-header{
     background-color: #FFFFFF;
     color: #393939;
     max-width: 100%;
-    padding: 10px 0px 10px 80px;
-    margin: 0px 0px 10px 0px;
+    padding: 10px 0px 0px 80px;
+    margin: 0px 0px 85px 0px;
 }
 
 .login-button{
@@ -119,6 +120,7 @@ form{
     font-family: 'Oswald', sans-serif;
     font-size: 3em;
     color: #51647a;
+    margin-bottom: 20px;
 }
 
 .description{
