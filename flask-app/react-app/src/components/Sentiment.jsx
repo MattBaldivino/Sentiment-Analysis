@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 var TextareaAutosize = require('react-textarea-autosize').default;
 
 function Sentiment(){
+
     return(
         <div id="interface">
             <Container className='sticky-lg-top sticky-md-top interface-header'>

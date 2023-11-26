@@ -4,8 +4,9 @@ import Form from 'react-bootstrap/Form';
 import { Link } from "react-router-dom";
 
 function LoginForm(props){
+
     return(
-            <Form>
+            <Form onSubmit>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label><h5>Email Address</h5></Form.Label>
                     <Form.Control type="email" placeholder="Enter email" />

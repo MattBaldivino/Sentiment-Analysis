@@ -1,42 +1,105 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+
+import axios from 'axios';
+import useToken from './useToken.js';
 
 function LoginForm(props) {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const { token, removeToken, setToken } = useToken();
+  const [loginForm, setloginForm] = useState({
+    email: '',
+    password: '',
+  });
 
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    };
+  const navigate = useNavigate(); // Initialize navigate
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
+  const handleEmailChange = (event) => {
+    setloginForm({
+      ...loginForm,
+      email: event.target.value,
+    });
+  };
 
-    const handleSubmit = (event) => {
-        event.preventDefault(); // Prevent the default form submission
-        props.onSubmit(email, password); // Pass email and password to the parent component's onSubmit function
-    };
+  const handlePasswordChange = (event) => {
+    setloginForm({
+      ...loginForm,
+      password: event.target.value,
+    });
+  };
 
-    return (
-        <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label><h5>Email Address</h5></Form.Label>
-                <Form.Control type="email" placeholder="Enter email" value={email} onChange={handleEmailChange} />
-            </Form.Group>
+  const logMeIn = (event) => {
+    event.preventDefault(); // Prevent the default form submission
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label><h5>Password</h5></Form.Label>
-                <Form.Control type="password" placeholder="Enter password" value={password} onChange={handlePasswordChange} />
-            </Form.Group>
-            <Button variant="primary" type="submit" className="rounded-pill login-button" size="sm">
-                <p>{props.buttonText}</p>
-            </Button>
-            <Link to="/RegisterScreen"><p>{props.registerText}</p></Link>
-        </Form>
-    );
+    axios({
+      method: 'POST',
+      url: '/token',
+      data: {
+        email: loginForm.email,
+        password: loginForm.password,
+      },
+    })
+      .then((response) => {
+        props.setToken(response.data.access_token, () => {
+            navigate('/Sentiment');
+          });
+          console.log('Before navigation');
+          navigate('/Sentiment'); // Force navigation here
+          // Log just after navigation
+          console.log('After navigation');
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+        }
+      });
+    // Optionally reset the form fields
+    setloginForm({
+      email: '',
+      password: '',
+    });
+  };
+
+  return (
+    <Form onSubmit={logMeIn}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>
+          <h5>Email Address</h5>
+        </Form.Label>
+        <Form.Control
+          placeholder="Enter email"
+          value={loginForm.email}
+          onChange={handleEmailChange}
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>
+          <h5>Password</h5>
+        </Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Enter password"
+          value={loginForm.password}
+          onChange={handlePasswordChange}
+        />
+      </Form.Group>
+      <br></br>
+      <Button
+        variant="primary"
+        type="submit"
+        className="rounded-pill login-button"
+        size="sm"
+      >
+        {props.buttonText}
+      </Button>
+      <br></br>
+      <Link to="/RegisterScreen">{props.registerText}</Link>
+    </Form>
+  );
 }
 
 export default LoginForm;

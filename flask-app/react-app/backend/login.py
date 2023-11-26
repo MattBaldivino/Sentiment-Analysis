@@ -7,14 +7,24 @@ from api.requestHandler import requestHandler
 import dotenv
 import os
 import json
+import json
+from flask import Flask, request, jsonify
+from datetime import datetime, timedelta, timezone
+from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
+                               unset_jwt_cookies, jwt_required, JWTManager
+
 
 app = Flask(__name__, static_url_path='', static_folder='react-app/build')
 CORS(app) #comment this on deployment
 api = Api(app)
+# api = Flask(__name__)
 
 dotenv.load_dotenv()
 
+# Setup for the token system
 app.secret_key = os.environ.get("SECRET_KEY")
+api.config["JWT_SECRET_KEY"] = os.environ.get("SECRET_KEY")
+jwt = JWTManager(api)
 
 # Database configuration
 app.config['MYSQL_HOST'] = os.environ.get("DATABASE_HOST")
@@ -28,6 +38,50 @@ mysql = MySQL(app)
 @app.route("/", defaults={'path':''})
 def serve(path):
     return send_from_directory(app.static_folder,'index.html')
+
+@api.route('/token', methods=["POST"])
+def create_token():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    if email != "test" or password != "test":
+        return {"msg": "Wrong email or password"}, 401
+
+    access_token = create_access_token(identity=email)
+    response = {"access_token":access_token}
+    return response
+
+@api.route('/profile')
+@jwt_required()
+def my_profile():
+    response_body = {
+        "name": "Nagato",
+        "about" :"Hello! I'm a full stack developer that loves python and javascript"
+    }
+
+    return response_body
+
+@api.route("/logout", methods=["POST"])
+def logout():
+    response = jsonify({"msg": "logout successful"})
+    unset_jwt_cookies(response)
+    return response
+
+@app.after_request
+def refresh_expiring_jwts(response):
+    try:
+        exp_timestamp = get_jwt()["exp"]
+        now = datetime.now(timezone.utc)
+        target_timestamp = datetime.timestamp(now + timedelta(minutes=30))
+        if target_timestamp > exp_timestamp:
+            access_token = create_access_token(identity=get_jwt_identity())
+            data = response.get_json()
+            if type(data) is dict:
+                data["access_token"] = access_token 
+                response.data = json.dumps(data)
+        return response
+    except (RuntimeError, KeyError):
+        # Case where there is not a valid JWT. Just return the original respone
+        return response
 
 @app.route('/login', methods=['POST', 'OPTIONS'])
 def login():
@@ -75,4 +129,4 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
-api.add_resource(requestHandler, '/flask/hello')
+# api.add_resource(requestHandler, '/flask/hello')
