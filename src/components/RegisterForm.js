@@ -34,7 +34,7 @@ function RegisterForm(props) {
 
     axios({
       method: 'POST',
-      url: '/token',
+      url: '/register',
       data: {
         email: loginForm.email,
         password: loginForm.password,
