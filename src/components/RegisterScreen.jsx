@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
-import LoginForm from './LoginForm.jsx';
+import RegisterForm from './RegisterForm.js';
 
 //bootstrap grid system divided into 12 columns
 //number parameter given expresses the width of the column as 12 divided by the parameter
@@ -21,7 +21,7 @@ function RegisterScreen(props){
                     <Row>
                         <Col lg={6} className="left-container"> 
                             <h2>Sign Up</h2>
-                            <LoginForm
+                            <RegisterForm
                                 buttonText = "Register"
                                 registerText = ""
                                 urlText="/"

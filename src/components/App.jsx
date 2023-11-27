@@ -1,12 +1,8 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import axios from "axios";
 import LoginScreen from "./LoginScreen.jsx";
 import RegisterScreen from './RegisterScreen.jsx';
-import Login from "./Login.js";
-import Sentiment from './Sentiment';
-import Header from './Header'
-import useToken from './useToken'
+import Sentiment from './Sentiment.jsx';
+import useToken from './useToken.js'
 import {
   BrowserRouter as Router,
   Routes,
@@ -34,12 +30,17 @@ function App() {
             ></Route>
             <Route
                   exact
+                  path="/Register"
+                  // Render the Sentiment component and pass it "token" and "setToken" props
+                  element={<RegisterScreen />}
+             ></Route>
+            <Route
+                  exact
                   path="/Sentiment"
                   // Render the Sentiment component and pass it "token" and "setToken" props
                   element={<Sentiment token={token} setToken={setToken} />}
              ></Route>
           </Routes>
-
         </div>
       </Router>
     </div>

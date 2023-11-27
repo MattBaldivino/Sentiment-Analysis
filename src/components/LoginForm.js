@@ -97,7 +97,7 @@ function LoginForm(props) {
         {props.buttonText}
       </Button>
       <br></br>
-      <Link to="/RegisterScreen">{props.registerText}</Link>
+      <Link to="/Register">{props.registerText}</Link>
     </Form>
   );
 }
