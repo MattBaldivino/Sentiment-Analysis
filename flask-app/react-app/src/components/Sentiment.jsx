@@ -3,11 +3,16 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Header from './Header.js'
+import removeToken from './useToken.js'
 var TextareaAutosize = require('react-textarea-autosize').default;
 
 function Sentiment(){
+    <Header token={removeToken} />
 
     return(
+        <>
+        <Header token={removeToken} />
         <div id="interface">
             <Container className='sticky-lg-top sticky-md-top interface-header'>
                 <Row>
@@ -40,6 +45,7 @@ function Sentiment(){
                 </Row>
             </Container>
         </div>
+        </>
     )
 }
 

@@ -5,13 +5,16 @@ import Col from 'react-bootstrap/Col';
 import Carousel from 'react-bootstrap/Carousel';
 import LoginForm from './LoginForm.js';
 import useToken from './useToken.js';
+import Header from './Header.js'
 
 //bootstrap grid system divided into 12 columns
 //number parameter given expresses the width of the column as 12 divided by the parameter
 //ex: sm={8} means that on small screen devices, the column will take up (12/8)% of the screen
+
 function LoginScreen(props){
     const { token, removeToken, setToken } = useToken();
     return(
+        <>
         <div className="login-body">
             <Container className='sticky-lg-top sticky-md-top header'>
                 <Row>
@@ -44,7 +47,8 @@ function LoginScreen(props){
                     </Row>
                 </Container>
             </div>
-       </div>        
+       </div> 
+       </>       
     );
 }
 

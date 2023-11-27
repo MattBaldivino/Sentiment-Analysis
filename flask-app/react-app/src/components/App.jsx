@@ -1,67 +1,50 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
-import LoginScreen from './LoginScreen.jsx';
+import React from 'react';
+import { useEffect, useState } from 'react';
+import axios from "axios";
+import LoginScreen from "./LoginScreen.jsx";
+import RegisterScreen from './RegisterScreen.jsx';
+import Login from "./Login.js";
 import Sentiment from './Sentiment';
-import Header from './Header';
-import useToken from './useToken'; // Import removeToken
-import removeToken from './useToken.js';
+import Header from './Header'
+import useToken from './useToken'
 import {
   BrowserRouter as Router,
-  Navigate, 
   Routes,
   Route,
-  useNavigate, // Import useNavigate
-} from 'react-router-dom';
-
+  Navigate,
+} from "react-router-dom";
 
 function App() {
-  const { token, setToken } = useToken();
+  /*Router basically allows us to navigate between components. Without it, the url would change but the 
+  corresponding components would not render*/
 
-  // No need for a useEffect for redirection
-  // Check if the token is set, and redirect accordingly
-  const redirectComponent = token ? <Navigate to="/Sentiment" /> : null;
-
-  const handleLogin = async (email, password) => {
-    try {
-      const response = await axios.post('/token', { email, password });
-      const accessToken = response.data.access_token;
-
-      // Set the token
-      setToken(accessToken);
-    } catch (error) {
-      // Handle login error
-      console.error(error);
-    }
-  };
+  const { token, removeToken, setToken } = useToken();
 
   return (
     <div className="App">
+      {/* Set up React Router for routing */}
       <Router>
         <div className="App">
-          <Header token={removeToken} />
-
-          {/* Include the redirection component */}
-          {redirectComponent}
-
+          {/* Display the Header component and pass it a "token" prop with the value "removeToken" */}
           <Routes>
+            <Route 
+                  exact
+                  path="/"
+                  element={<LoginScreen setToken={setToken}/>}
+            ></Route>
             <Route
-              exact
-              path="/Sentiment"
-              element={<Sentiment token={token} setToken={setToken} />}
-            />
-            <Route
-              path="/"
-              element={
-                <LoginScreen
-                  setToken={(email, password) => handleLogin(email, password)}
-                />
-              }
-            />
+                  exact
+                  path="/Sentiment"
+                  // Render the Sentiment component and pass it "token" and "setToken" props
+                  element={<Sentiment token={token} setToken={setToken} />}
+             ></Route>
           </Routes>
+
         </div>
       </Router>
     </div>
   );
+   
 }
 
 export default App;
