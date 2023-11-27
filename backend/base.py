@@ -8,6 +8,9 @@ from flask_jwt_extended import (
     unset_jwt_cookies, JWTManager
 )
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
+import requests
+
 
 # Initialize Flask app
 api = Flask(__name__)
@@ -27,6 +30,31 @@ mysql = MySQL(api)
 
 # Initialize bcrypt
 bcrypt = Bcrypt(api)
+
+# Origin from different ports not allowed, so adding CORs
+CORS(api)
+
+api_endpoint = "https://bbtflv6yqf.execute-api.us-east-1.amazonaws.com/Initial/sentimental-analysis"
+
+def send_single_query(endpoint, text):
+    payload = {
+        'queryType': 'single',
+        'query': text
+    }
+    response = requests.get(endpoint, params=payload)
+    return response.json()
+
+def send_multiple_query(endpoint, texts):
+    json_data = json.dumps(texts)
+    base64_encoded_data = base64.b64encode(json_data.encode()).decode()
+
+    payload = {
+        'queryType': 'multiple',
+        'query': base64_encoded_data
+    }
+    response = requests.get(endpoint, params=payload)
+    return response.json()
+
 
 @api.route('/register', methods=["POST"])
 def register():
@@ -68,6 +96,23 @@ def logout():
     response = jsonify({"msg": "logout successful"})
     unset_jwt_cookies(response)
     return response
+
+@api.route('/analyze-sentiment', methods=["POST"])
+def analyze_sentiment():
+    data = request.json
+    query = data.get("query")
+
+    if not query:
+        return jsonify({"error": "No query provided"}), 400
+
+    if isinstance(query, str):
+        response = send_single_query(api_endpoint, query)
+    elif isinstance(query, list):
+        response = send_multiple_query(api_endpoint, query)
+    else:
+        return jsonify({"error": "Invalid query format"}), 400
+
+    return jsonify(response)
 
 @api.after_request
 def refresh_expiring_jwts(response):
