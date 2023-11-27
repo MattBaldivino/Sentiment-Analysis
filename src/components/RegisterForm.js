@@ -102,4 +102,4 @@ function RegisterForm(props) {
   );
 }
 
-export default LoginForm;
+export default RegisterForm;
