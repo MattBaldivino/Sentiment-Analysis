@@ -20,7 +20,7 @@ function App() {
     <div className="App">
       {/* Set up React Router for routing */}
       <Router>
-        <div className="App">
+        <div>
           {/* Display the Header component and pass it a "token" prop with the value "removeToken" */}
           <Routes>
             <Route 

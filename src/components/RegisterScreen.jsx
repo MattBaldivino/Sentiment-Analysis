@@ -19,16 +19,16 @@ function RegisterScreen(props){
             <div className="login">
                 <Container>
                     <Row>
-                        <Col lg={6} className="left-container"> 
-                            <h2>Sign Up</h2>
+                        <Col sm={12} md={12} lg={6} className="left-container"> 
+                            <h1>Sign Up</h1>
                             <RegisterForm
                                 buttonText = "Register"
                                 registerText = ""
                                 urlText="/"
                             />
                         </Col>
-                        <Col lg={6} className="right-container">
-                            <img src="https://cdn-icons-png.flaticon.com/512/10148/10148754.png" alt="emotion"></img>
+                        <Col sm={12} md={12} lg={6} className="right-container">
+                            <img id="icon" src="https://cdn-icons-png.flaticon.com/512/10148/10148754.png" alt="emotion"></img>
                             <Carousel indicators={false}>
                                 <Carousel.Item>
                                     <h2>An easy to use AI Web Application</h2>
@@ -36,7 +36,7 @@ function RegisterScreen(props){
                                 </Carousel.Item>
                                 <Carousel.Item>
                                     <h2>Trouble expressing your feelings?</h2>
-                                    <h4>Enter your favorite sea shanty to see the emotion it carries!</h4>
+                                    <h4>Type your favorite sea shanty to see the emotion it carries!</h4>
                                 </Carousel.Item>
                             </Carousel>
                         </Col>

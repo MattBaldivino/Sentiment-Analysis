@@ -39,23 +39,12 @@ function Header(props) {
       pointerEvents: 'all'
     }}>
       {!token ? (
-        <button onClick={logMeIn} style={buttonStyle}>Login</button>
+        <button onClick={logMeIn} className="login-button rounded-pill credentials"><p>Login</p></button>
       ) : (
-        <button onClick={logMeOut} style={buttonStyle}>Logout</button>
+        <button onClick={logMeOut} className="login-button rounded-pill credentials"><p>Logout</p></button>
       )}
     </header>
   );
 }
-
-const buttonStyle = {
-  backgroundColor: 'black',
-  color: 'white',
-  border: 'none',
-  borderRadius: '4px', // Adjusted for a squared look
-  width: '80px', // Adjusted for a longer appearance
-  height: '40px',
-  textAlign: 'center',
-  cursor: 'pointer'
-};
 
 export default Header;

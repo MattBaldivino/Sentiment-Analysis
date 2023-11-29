@@ -24,14 +24,14 @@ function LoginScreen(props){
             <div className="login">
                 <Container>
                     <Row>
-                        <Col lg={6} className="left-container">
+                        <Col sm={12} md={12} lg={6} className="left-container">
                             <h1>Welcome</h1>
                             <LoginForm 
                             buttonText = "Login"
                             registerText = "Don't have an account? Register here!"
                             setToken={setToken}/>
                         </Col>
-                        <Col lg={6} className="right-container">
+                        <Col sm={12} md={12} lg={6} className="right-container">
                             <img src="https://cdn-icons-png.flaticon.com/512/10148/10148754.png" alt="emotion"></img>
                             <Carousel indicators={false}>
                                 <Carousel.Item>
@@ -40,7 +40,7 @@ function LoginScreen(props){
                                 </Carousel.Item>
                                 <Carousel.Item>
                                     <h2>Trouble expressing your feelings?</h2>
-                                    <h4>Enter your favorite sea shanty to see the emotion it carries!</h4>
+                                    <h4>Type your favorite sea shanty to see the emotion it carries!</h4>
                                 </Carousel.Item>
                             </Carousel>
                         </Col>
