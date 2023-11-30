@@ -20,32 +20,33 @@ function App() {
     <div className="App">
       {/* Set up React Router for routing */}
       <Router>
-        <div className="App">
-          {/* Display the Header component and pass it a "token" prop with the value "removeToken" */}
+        <div>
+          {/* Conditional rendering based on the token */}
+          {!token && token !== "" && token !== undefined ? 
+            <LoginScreen setToken={setToken} />
+            :
+            <>
+              {/* Display the Header component and pass it a "token" prop with the value "removeToken" */}
+              {/* <Header removeToken={setToken} /> */}
+              {/* Define routes */}
+              <Routes>
+                <Route exact path="/Sentiment" element={<Sentiment token={token} setToken={setToken}/>}></Route>
+                {/* Other authenticated routes can go here */}
+              </Routes>
+            </>
+          }
+  
+          {/* Define routes that are always accessible */}
           <Routes>
-            <Route 
-                  exact
-                  path="/"
-                  element={<LoginScreen setToken={setToken}/>}
-            ></Route>
-            <Route
-                  exact
-                  path="/Register"
-                  // Render the Sentiment component and pass it "token" and "setToken" props
-                  element={<RegisterScreen />}
-             ></Route>
-            <Route
-                  exact
-                  path="/Sentiment"
-                  // Render the Sentiment component and pass it "token" and "setToken" props
-                  element={<Sentiment token={token} setToken={setToken} />}
-             ></Route>
+            <Route exact path="/" element={<LoginScreen setToken={setToken}/>} ></Route>
+            <Route exact path="/Register" element={<RegisterScreen />} ></Route>
+            {/* Other unauthenticated routes can go here */}
           </Routes>
         </div>
       </Router>
     </div>
   );
-   
+     
 }
 
 export default App;
