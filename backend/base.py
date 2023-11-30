@@ -11,7 +11,6 @@ from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 import requests
 
-
 # Initialize Flask app
 api = Flask(__name__)
 
@@ -65,6 +64,8 @@ def register():
     cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
     account = cursor.fetchone()
 
+    print(account)
+
     if account:
         return {"msg": "Email already exists"}, 409
 
@@ -81,15 +82,31 @@ def create_token():
     password = request.json.get("password", None)
 
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
-    account = cursor.fetchone()
 
-    if account and bcrypt.check_password_hash(account[2], password):
-        access_token = create_access_token(identity=email)
-        response = {"access_token": access_token}
-        return response
+    try:
+        # Fetch user data based on email only
+        cursor.execute("SELECT email, password FROM users WHERE email = %s", (email,))
+        account = cursor.fetchone()
 
-    return {"msg": "Wrong email or password"}, 401
+        if account:
+            stored_password = account[1]  # Assuming the password is the second column
+
+            # Check if entered password matches the stored hashed password
+            if bcrypt.check_password_hash(stored_password, password):
+                access_token = create_access_token(identity=email)
+                response = {"access_token": access_token}
+                return response
+            else:
+                msg = "Wrong email or password"
+                return jsonify({"error": msg}), 401
+        else:
+            msg = "User not found"
+            return jsonify({"error": msg}), 404
+
+    except Exception as e:
+        msg = f"Error during authentication: {str(e)}"
+        return jsonify({"error": msg}), 500
+
 
 @api.route("/logout", methods=["POST"])
 def logout():
