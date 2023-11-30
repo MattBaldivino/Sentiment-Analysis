@@ -11,7 +11,6 @@ from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 import requests
 
-
 # Initialize Flask app
 api = Flask(__name__)
 

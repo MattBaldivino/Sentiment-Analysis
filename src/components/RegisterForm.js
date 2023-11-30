@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
-
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate, for page redirection.
 import axios from 'axios';
 import useToken from './useToken.js';
 
@@ -31,7 +30,7 @@ function RegisterForm(props) {
 
   const logMeIn = (event) => {
     event.preventDefault(); // Prevent the default form submission
-
+    navigate('/');
     axios({
       method: 'POST',
       url: '/register',
@@ -42,12 +41,7 @@ function RegisterForm(props) {
     })
       .then((response) => {
         props.setToken(response.data.access_token, () => {
-            navigate('/Sentiment');
           });
-          console.log('Before navigation');
-          navigate('/Sentiment'); // Force navigation here
-          // Log just after navigation
-          console.log('After navigation');
       })
       .catch((error) => {
         if (error.response) {
@@ -56,7 +50,6 @@ function RegisterForm(props) {
           console.log(error.response.headers);
         }
       });
-    // Optionally reset the form fields
     setloginForm({
       email: '',
       password: '',

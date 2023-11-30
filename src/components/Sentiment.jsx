@@ -18,8 +18,30 @@ function Sentiment() {
 
     const handleSubmit = async () => {
         try {
-            const result = await axios.post('http://localhost:5000/analyze-sentiment', { query: text });
-            setResponse(result.data);
+            const container = document.getElementsByClassName("left-container")[0];
+            const progress = document.createElement("p");
+            const node = document.createTextNode("Analyzing input...");
+            progress.appendChild(node);
+            container.appendChild(progress);
+            const result = await axios.post('http://localhost:5000/analyze-sentiment', { query: text.trim() });
+            const emotion = JSON.stringify(result.data.body).replace(/['"]+/g, '');
+            if(emotion === "Positive"){
+                progress.remove();
+                const element = document.getElementsByClassName("left-container")[0];
+                if(element.hasAttribute("negative") || element.hasAttribute("positive")){
+                    element.removeAttribute("negative");
+                }
+                element.setAttribute("id", "positive");
+                setResponse(emotion + " :)");
+            }else if(emotion === "Negative"){
+                progress.remove();
+                const element = document.getElementsByClassName("left-container")[0];
+                if(element.hasAttribute("positive") || element.hasAttribute("negative")){
+                    element.removeAttribute("positive");
+                }
+                element.setAttribute("id", "negative");
+                setResponse(emotion + " :(");
+            }
         } catch (error) {
             console.error("Error sending sentiment analysis request:", error);
             setResponse({ error: "Error processing your request" });
@@ -35,7 +57,7 @@ function Sentiment() {
                         <Col lg={3}><h5>Sentiment Analysis App</h5></Col>
                     </Row>
                 </Container>
-                <div>
+                <div className="content">
                     <Container>
                         <Row>
                             <Col lg={6} className="left-container">
@@ -45,8 +67,8 @@ function Sentiment() {
                                 <Button variant="primary" onClick={handleSubmit} className="rounded-pill login-button" size="sm">
                                     <p>Analyze</p>
                                 </Button>
-                                <h1 className="section">Response:</h1>
-                                {response && <div className="response"><p>{JSON.stringify(response, null, 2)}</p></div>}
+                                <h1 className="section" id="response-section">Response:</h1>
+                                {response && <div id="response"><p>{response}</p></div>}
                             </Col>
                             <Col lg={6} className="right-container sentiment-right">
                                 <h1 className="section">What Is It?</h1>
@@ -54,7 +76,6 @@ function Sentiment() {
                                 <hr />
                                 <h1 className="section">Why Use It?</h1>
                                 <p className="description">It is commonly used by those seeking to analyze customer reviews, comments, surveys, and other areas where customer feedback is crucial. Our sentiment analysis site allows users to submit a body of text which will return with either 'Positive', 'Negative', or 'Neutral' emotion.</p>
-                                <hr />
                                
                             </Col>
                         </Row>
