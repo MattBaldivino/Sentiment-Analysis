@@ -20,33 +20,23 @@ function App() {
     <div className="App">
       {/* Set up React Router for routing */}
       <Router>
-        <div>
-          {/* Conditional rendering based on the token */}
-          {!token && token !== "" && token !== undefined ? 
-            <LoginScreen setToken={setToken} />
-            :
-            <>
-              {/* Display the Header component and pass it a "token" prop with the value "removeToken" */}
-              {/* <Header removeToken={setToken} /> */}
-              {/* Define routes */}
-              <Routes>
-                <Route exact path="/Sentiment" element={<Sentiment token={token} setToken={setToken}/>}></Route>
-                {/* Other authenticated routes can go here */}
-              </Routes>
-            </>
-          }
-  
-          {/* Define routes that are always accessible */}
-          <Routes>
-            <Route exact path="/" element={<LoginScreen setToken={setToken}/>} ></Route>
-            <Route exact path="/Register" element={<RegisterScreen />} ></Route>
-            {/* Other unauthenticated routes can go here */}
-          </Routes>
-        </div>
+        <Routes>
+          {/* Redirect to login if not authenticated */}
+          {!token && <Route path="*" element={<Navigate replace to="/" />} />}
+
+          {/* Login and Register Routes */}
+          <Route exact path="/" element={<LoginScreen setToken={setToken} />} />
+          <Route exact path="/Register" element={<RegisterScreen />} />
+
+          {/* Redirect to a default authenticated route */}
+          {token && <Route path="/" element={<Navigate replace to="/Sentiment" />} />}
+
+          {/* Authenticated Route */}
+          <Route exact path="/Sentiment" element={<Sentiment token={token} />} />
+        </Routes>
       </Router>
     </div>
   );
-     
 }
 
 export default App;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
@@ -8,6 +8,7 @@ import useToken from './useToken.js';
 
 function LoginForm(props) {
   const { token, removeToken, setToken } = useToken();
+  
   const [loginForm, setloginForm] = useState({
     email: '',
     password: '',
@@ -41,13 +42,8 @@ function LoginForm(props) {
       },
     })
       .then((response) => {
-        props.setToken(response.data.access_token, () => {
-            navigate('/Sentiment');
-          });
-          console.log('Before navigation');
-          navigate('/Sentiment'); // Force navigation here
-          // Log just after navigation
-          console.log('After navigation');
+        props.setToken(response.data.access_token)
+        navigate('/Sentiment');
       })
       .catch((error) => {
         if (error.response) {
@@ -62,6 +58,12 @@ function LoginForm(props) {
       password: '',
     });
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate('/Sentiment'); // Redirect to the authenticated route
+    }
+  }, [token, navigate]); // Dependencies array
 
   return (
     <Form onSubmit={logMeIn}>
