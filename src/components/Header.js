@@ -39,9 +39,9 @@ function Header(props) {
       pointerEvents: 'all'
     }}>
       {!token ? (
-        <button onClick={logMeIn} className="login-button rounded-pill credentials"><p>Login</p></button>
+        <button onClick={logMeIn} className="login-button rounded-pill credentials">Login</button>
       ) : (
-        <button onClick={logMeOut} className="login-button rounded-pill credentials"><p>Logout</p></button>
+        <button onClick={logMeOut} className="login-button rounded-pill credentials">Logout</button>
       )}
     </header>
   );

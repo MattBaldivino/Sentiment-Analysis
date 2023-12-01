@@ -33,7 +33,7 @@ function LoginScreen(props){
                         </Col>
                         <Col sm={12} md={12} lg={6} className="right-container">
                             <img src="https://cdn-icons-png.flaticon.com/512/10148/10148754.png" alt="emotion"></img>
-                            <Carousel indicators={false}>
+                            <Carousel className="items" indicators={false}>
                                 <Carousel.Item>
                                     <h2>An easy to use AI Web Application</h2>
                                     <h4>Login to get started.</h4>

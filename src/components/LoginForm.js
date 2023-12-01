@@ -71,7 +71,7 @@ function LoginForm(props) {
         <Form.Label>
           <h5>Email Address</h5>
         </Form.Label>
-        <Form.Control
+        <Form.Control size="lg"
           placeholder="Enter email"
           value={loginForm.email}
           onChange={handleEmailChange}
@@ -82,7 +82,7 @@ function LoginForm(props) {
         <Form.Label>
           <h5>Password</h5>
         </Form.Label>
-        <Form.Control
+        <Form.Control size="lg"
           type="password"
           placeholder="Enter password"
           value={loginForm.password}

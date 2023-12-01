@@ -65,7 +65,7 @@ function Sentiment() {
                                 <TextareaAutosize autoFocus value={text} onChange={handleTextChange} />
                                 <br />
                                 <Button variant="primary" onClick={handleSubmit} className="rounded-pill login-button" size="sm">
-                                    <p>Analyze</p>
+                                    Analyze
                                 </Button>
                                 <h1 className="section" id="response-section">Response:</h1>
                                 {response && <div id="response"><p>{response}</p></div>}
