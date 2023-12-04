@@ -39,7 +39,7 @@ ingress:
     service: <LocalServerIP>
   - service: http_status:404
 ```
-- ** Example Config File: **
+- **Example Config File:**
 ```
 tunnel: 586a67bd-f491-4214-968e-f27d7011dc07                                                                             │
 credentials-file: /Users/jaymerjacob/.cloudflared/586a67bd-f491-4214-968e-f27d7011dc07.json                              │
@@ -48,7 +48,7 @@ ingress:                                                                        
     service: http://10.110.170.80:3000                                                                                   │
   - service: http_status:404 
 ```
-- ** Example Config File with multiple domains: **
+- **Example Config File with multiple domains:**
 ```
 tunnel: 586a67bd-f491-4214-968e-f27d7011dc07                                                                             │
 credentials-file: /Users/jaymerjacob/.cloudflared/586a67bd-f491-4214-968e-f27d7011dc07.json                              │
