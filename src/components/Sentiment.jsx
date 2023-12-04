@@ -21,9 +21,13 @@ function Sentiment() {
             const container = document.getElementsByClassName("left-container")[0];
             const progress = document.createElement("p");
             const node = document.createTextNode("Analyzing input...");
+            
             progress.appendChild(node);
             container.appendChild(progress);
-            const result = await axios.post('http://localhost:5000/analyze-sentiment', { query: text.trim() });
+
+            const result = await axios.post('https://sentbackend.jacobjayme.xyz/analyze-sentiment', { query: text.trim() });
+            console.log(result)
+            
             const emotion = JSON.stringify(result.data.body).replace(/['"]+/g, '');
             if(emotion === "Positive"){
                 progress.remove();
@@ -41,6 +45,14 @@ function Sentiment() {
                 }
                 element.setAttribute("id", "negative");
                 setResponse(emotion + " :(");
+            } else if (emotion === "Neutral"){
+                progress.remove();
+                const element = document.getElementsByClassName("left-container")[0];
+                if(element.hasAttribute("positive") || element.hasAttribute("negative") || element.hasAttribute("neutral")){
+                    element.removeAttribute("nuetral");
+                }
+                element.setAttribute("id", "neutral");
+                setResponse(emotion + " :|");
             }
         } catch (error) {
             console.error("Error sending sentiment analysis request:", error);
@@ -64,9 +76,13 @@ function Sentiment() {
                                 <h1 className="section">Type Here:</h1>
                                 <TextareaAutosize autoFocus value={text} onChange={handleTextChange} />
                                 <br />
-                                <Button variant="primary" onClick={handleSubmit} className="rounded-pill login-button" size="sm">
-                                    Analyze
-                                </Button>
+                                <Button 
+                                variant="primary" 
+                                onClick={handleSubmit} 
+                                className="rounded-pill login-button" 
+                                size="sm"
+                                disabled={text.trim().length === 0}  // Disable button if text is empty
+                            > Analyze </Button>
                                 <h1 className="section" id="response-section">Response:</h1>
                                 {response && <div id="response"><p>{response}</p></div>}
                             </Col>

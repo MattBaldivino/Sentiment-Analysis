@@ -41,6 +41,7 @@ def send_single_query(endpoint, text):
         'query': text
     }
     response = requests.get(endpoint, params=payload)
+    print(response)
     return response.json()
 
 def send_multiple_query(endpoint, texts):
@@ -118,6 +119,8 @@ def logout():
 def analyze_sentiment():
     data = request.json
     query = data.get("query")
+
+    print(data)
 
     if not query:
         return jsonify({"error": "No query provided"}), 400
