@@ -1,6 +1,10 @@
 # Sentimental Analysis Full Stack Application 
 Full stack application for Sentimental Analysis using a custom model, utilizing ReactJS for Frontend, Flask for Backend, MySQL for the database, and tensorflow for the model. Hosted on a local server that is exposed to the internet via a cloud flared tunnel.
 
+## Architecture
+![Picture of Architecture](https://media.discordapp.net/attachments/1149135431846338631/1181373253541965894/2250diagrams-Highlevel-overview.drawio_2.png?ex=6580d294&is=656e5d94&hm=91bd58b48ff426cb40ce2c7e6c798bf598c89ac1031ecd118465f76d9feea461&=&format=webp&quality=lossless&width=2120&height=842)
+
+
 ## How to run the application 
 1. First we run the flask backend using the following commands. Might look different varying from what type of OS or if you're using a python environment. The flask backend handles things such as distributing tokens, user authentication, interacting with the MySQL and getting information, as well as querying the Custom made AI API that we have made. The `--host=0.0.0.0` option makes the flask server exposed to the local network, so people can access it within the network. This is important because, later we need to expose the local server so it is accessible over the internet, and in order to do that it needs an IP address on the local network.
 ```
@@ -35,7 +39,7 @@ ingress:
     service: <LocalServerIP>
   - service: http_status:404
 ```
-- ** Example Config File: 
+- ** Example Config File: **
 ```
 tunnel: 586a67bd-f491-4214-968e-f27d7011dc07                                                                             │
 credentials-file: /Users/jaymerjacob/.cloudflared/586a67bd-f491-4214-968e-f27d7011dc07.json                              │
@@ -44,7 +48,7 @@ ingress:                                                                        
     service: http://10.110.170.80:3000                                                                                   │
   - service: http_status:404 
 ```
-- ** Example Config File with multiple domains:
+- ** Example Config File with multiple domains: **
 ```
 tunnel: 586a67bd-f491-4214-968e-f27d7011dc07                                                                             │
 credentials-file: /Users/jaymerjacob/.cloudflared/586a67bd-f491-4214-968e-f27d7011dc07.json                              │
@@ -52,4 +56,28 @@ ingress:                                                                        
   - hostname: sentiment.jacobjayme.xyz                                                                                   │
     service: http://10.110.170.80:5000                                                                                   │
   - service: http_status:404 
+```
+
+## Accessing the database
+- The way this server is accessed was using a simple MySQL database, hosted remotely on MySQL free hosting platform. Make sure to create your own table and enter your credentials in a `.env` file, then it is loaded using the `os` python module:
+
+`.env`
+```
+SECRET_KEY=""
+DATABASE_HOST=""
+DATABASE_USERNAME=""
+DATABASE_PASSWORD=""
+DATABASE_NAME=""
+```
+
+`base.py`
+```
+# Database configuration
+api.config['MYSQL_HOST'] = os.environ.get("DATABASE_HOST")
+api.config['MYSQL_USER'] = os.environ.get("DATABASE_USERNAME")
+api.config['MYSQL_PASSWORD'] = os.environ.get("DATABASE_PASSWORD")
+api.config['MYSQL_DB'] = os.environ.get("DATABASE_NAME")
+
+# Initialize MySQL
+mysql = MySQL(api)
 ```
