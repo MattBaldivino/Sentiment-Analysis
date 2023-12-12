@@ -25,7 +25,7 @@ function Sentiment() {
             progress.appendChild(node);
             container.appendChild(progress);
 
-            const result = await axios.post('https://sentbackend.jacobjayme.xyz/analyze-sentiment', { query: text.trim() });
+            const result = await axios.post('https://sentbackend.onrender.com/analyze-sentiment', { query: text.trim() });
             console.log(result)
             
             const emotion = JSON.stringify(result.data.body).replace(/['"]+/g, '');
